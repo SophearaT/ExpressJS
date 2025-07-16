@@ -2,11 +2,13 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
-import { users } from './sample.js';
-import { books } from './sample.js';
-import { teachers } from './sample.js';
-import { money } from './sample.js';
-import { stock } from './sample.js';
+
+// import { users } from '../sample.js';
+// import { books } from '../sample.js';
+// import { teachers } from '../sample.js';
+// import { money } from '../sample.js';
+// import { stock } from '../sample.js';
+import userRoute from './routes/user.route.js';
 
 const app = express();
 
@@ -29,7 +31,7 @@ app.use(bodyParser.json());
 // app.get('/users', (req,res)=>{
 //     return res.send('Hello World!');
 // })
-
+/*  
 //users
 app.get('/users/',(req,res)=> {
     return res.json(users);
@@ -125,7 +127,9 @@ app.get('/stock/:id',(req,res) => {
     }
     return res.json(st);
 });
+*/
 
+app.use('/users', userRoute);
 //app.listen(3000,running);
 //ShortCut to use func of running
 app.listen(3000, () =>{
