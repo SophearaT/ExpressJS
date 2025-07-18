@@ -10,6 +10,7 @@ import bodyParser from 'body-parser';
 // import { stock } from '../sample.js';
 import teacherRoute from './routes/teacher.route.js';
 import userRoute from './routes/user.route.js';
+import stockRoute from "./routes/stock.route.js"
 
 const app = express();
 
@@ -134,6 +135,7 @@ app.use('/users', userRoute);
 //app.listen(3000,running);
 //ShortCut to use func of running
 app.use("/teachers", teacherRoute);
+app.use("/stock", stockRoute);
 app.listen(3000, () =>{
     console.log("Running on 3000");
 });
