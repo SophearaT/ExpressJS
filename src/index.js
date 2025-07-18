@@ -11,11 +11,27 @@ import bodyParser from 'body-parser';
 import teacherRoute from './routes/teacher.route.js';
 import userRoute from './routes/user.route.js';
 import stockRoute from "./routes/stock.route.js"
+import { dbConnect } from './database/db.js';
+
+dbConnect().catch((err) => {
+    console.log(err);
+})
 
 const app = express();
 
 // POST & PATCH & PUT
 app.use(bodyParser.json());
+
+
+
+app.use('/users', userRoute);
+//app.listen(3000,running);
+//ShortCut to use func of running
+app.use("/teachers", teacherRoute);
+app.use("/stocks", stockRoute);
+app.listen(3000, () =>{
+    console.log("Running on 3000");
+});
 
 //Full func of getAllUsers
 // function getAllUsers(req,res){
@@ -130,12 +146,3 @@ app.get('/stock/:id',(req,res) => {
     return res.json(st);
 });
 */
-
-app.use('/users', userRoute);
-//app.listen(3000,running);
-//ShortCut to use func of running
-app.use("/teachers", teacherRoute);
-app.use("/stock", stockRoute);
-app.listen(3000, () =>{
-    console.log("Running on 3000");
-});

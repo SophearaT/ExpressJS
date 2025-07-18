@@ -1,4 +1,5 @@
 import { teachers } from "../models/teacher.model.js";
+import { stockModel } from "../models/stock.model.js";
 
 
 
