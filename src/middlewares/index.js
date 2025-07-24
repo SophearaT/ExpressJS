@@ -1,3 +1,5 @@
+import { validationResult } from "express-validator";
+
 export function teacherMiddleware(req, res, next){
     if (req.query.minYear){
         const minYear = parseInt(req.query.minYear);
@@ -13,6 +15,14 @@ export function teacherMiddleware(req, res, next){
                 message: "Subject must be string"
             });
         }
+    }
+    next();
+}
+export function handleValidation(req,res,next){
+    const result = validationResult(req);
+    console.log(result);
+    if(!result.isEmpty()){
+        return res.status(400).send({ error: result.array()});
     }
     next();
 }
