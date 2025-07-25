@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const stockSchema = new mongoose.Schema({
     name: {
@@ -9,7 +10,14 @@ const stockSchema = new mongoose.Schema({
     },
     price: {
         type: Number
+    },
+    byUser:{
+        type: mongoose.Types.ObjectId,
+        ref: 'users'
     }
+    },{
+
+    timestamps: true
 });
 
 export const stockModel = mongoose.model('stocks', stockSchema);

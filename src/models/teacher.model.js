@@ -1,3 +1,33 @@
+// api/teachers?subject=Math&minYear=5
+import mongoose from "mongoose";
+import mongoosePaginate from 'mongoose-paginate-v2';
+
+const teacherSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    subject: {
+        type: String,
+        required: true
+    },
+    yearsOfExperience: {
+        type: Number,
+        required: true
+    },
+    courses: [
+        { type: mongoose.Types.ObjectId, ref: 'Courses' }
+    ]
+}, {
+    timestamps: true
+});
+
+teacherSchema.plugin(mongoosePaginate)
+
+export const teacherModel = mongoose.model("Teachers", teacherSchema);
+
+
+/*
 export const teachers = [
   { id: 201, name: "Mr. Smith", subject: "Math", yearsOfExperience: 10 },
   { id: 202, name: "Ms. Johnson", subject: "English", yearsOfExperience: 5 },
@@ -50,3 +80,4 @@ export const teachers = [
   { id: 249, name: "Dr. Brooks", subject: "Data Science", yearsOfExperience: 11 },
   { id: 250, name: "Mrs. Kelly", subject: "Web Development", yearsOfExperience: 10 }
 ];
+*/

@@ -40,7 +40,7 @@ export const createUserValidator = checkSchema({
         }
     },
     role:{
-        isIn:{
+        isIn: {
             options:['member','admin','editor']
         },
         errorMessage: "Role must be among member,admin,editor"

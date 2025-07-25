@@ -1,5 +1,5 @@
 //Using ESM Style
-
+import "dotenv/config";
 import express from 'express';
 import bodyParser from 'body-parser';
 
@@ -10,8 +10,13 @@ import bodyParser from 'body-parser';
 // import { stock } from '../sample.js';
 import teacherRoute from './routes/teacher.route.js';
 import userRoute from './routes/user.route.js';
-import stockRoute from "./routes/stock.route.js"
+import stockRoute from "./routes/stock.route.js";
+import courseRoute from './routes/course.route.js';
 import { dbConnect } from './database/db.js';
+import { handleError } from './middlewares/index.js';
+import morgan from 'morgan';
+import cors from "cors";
+import authRoute from './routes/auth.route.js';
 
 dbConnect().catch((err) => {
     console.log(err);
@@ -19,19 +24,35 @@ dbConnect().catch((err) => {
 
 const app = express();
 
+app.use(cors());
 // POST & PATCH & PUT
 app.use(bodyParser.json());
 
-
+app.use(morgan('combined'));
 
 app.use('/users', userRoute);
 //app.listen(3000,running);
 //ShortCut to use func of running
 app.use("/teachers", teacherRoute);
 app.use("/stocks", stockRoute);
+app.use("/courses", courseRoute);
+
+app.use("/auth", authRoute);
+
+app.use(handleError);
+
+
 app.listen(3000, () =>{
     console.log("Running on 3000");
 });
+
+
+
+
+
+
+
+
 
 //Full func of getAllUsers
 // function getAllUsers(req,res){
