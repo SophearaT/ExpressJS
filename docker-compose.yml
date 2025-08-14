@@ -1,0 +1,18 @@
+services:
+  express:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: express
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+      - .env:/app/.env
+    depends_on:
+      - express-db
+  express-db:
+    image: mongo:latest
+    container_name: express-db
+    ports:
+      - 27017:27017

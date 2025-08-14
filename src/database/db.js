@@ -1,7 +1,8 @@
  import mongoose from "mongoose";
 
  const dbName = "cadt-idg-003";
- const mongoURI = 'mongodb://localhost:27017';
+ const mongoURI = 'mongodb://express-db:27017';
+ console.log("connecting to Mongo")
 
  export async function dbConnect() {
     mongoose.connection.on('connected', () => {
