@@ -12,7 +12,16 @@ services:
     depends_on:
       - express-db
   express-db:
-    image: mongo:latest
+    image: mongo:8.0.12-noble
     container_name: express-db
     ports:
       - 27017:27017
+    volumes:
+      - express-db-data:/data/db
+  express-redis-cache:
+    image: redis:8.2.0-alpine
+    container_name: express-redis-cache
+    ports:
+      - 6379:6379
+volumes:
+    express-db-data:
